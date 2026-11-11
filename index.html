@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Critical CSS Generator</title>
+    
+    <!-- Typography: Inter (OpenAI Sans equivalent with geometric warmth) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons: FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              obsidian: '#000000',
+              graphite: '#666666',
+              smoke: '#8f8f8f',
+              paper: '#ffffff',
+              ash: '#f1f1f1',
+              hairline: 'rgba(0, 0, 0, 0.12)',
+              whisper: 'rgba(0, 0, 0, 0.04)',
+            },
+            fontFamily: {
+              sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+              mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
+            },
+            borderRadius: {
+              cards: '6px',
+              buttons: '9999px',
+              tags: '9999px',
+              inputs: '9999px',
+            },
+            letterSpacing: {
+              display: '-1.44px',
+              heading: '0.31px',
+              subheading: '-0.22px',
+              body: '-0.18px',
+              input: '-0.16px',
+              caption: '-0.13px',
+            },
+            boxShadow: {
+              sm: 'rgba(0, 0, 0, 0.02) 0px 4px 6px 0px, rgba(0, 0, 0, 0.05) 0px 0px 2px 0px',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+      :root {
+        /* Colors */
+        --color-obsidian: #000000;
+        --color-graphite: #666666;
+        --color-smoke: #8f8f8f;
+        --color-paper: #ffffff;
+        --color-ash: #f1f1f1;
+        --color-hairline: rgba(0, 0, 0, 0.12);
+        --color-whisper: rgba(0, 0, 0, 0.04);
+
+        /* Typography */
+        --font-openai-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+        /* Type Scale */
+        --text-caption: 13px;
+        --text-input: 16px;
+        --text-body-lg: 18px;
+        --text-subheading: 22px;
+        --text-heading: 28px;
+        --text-display: 48px;
+
+        /* Border Radius */
+        --radius-cards: 6px;
+        --radius-buttons: 9999px;
+        --radius-tags: 9999px;
+        --radius-inputs: 9999px;
+        --radius-links: 4px;
+      }
+
+      body {
+        font-family: var(--font-openai-sans);
+        background-color: var(--color-paper);
+        color: var(--color-obsidian);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-feature-settings: 'calt' 1, 'liga' 1;
+        margin: 0;
+        padding: 0;
+      }
+
+      /* Custom scrollbar matching OpenAI minimalism */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.15);
+        border-radius: 9999px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      /* Reusable OpenAI Component Utilities */
+      .btn-filled {
+        background-color: var(--color-obsidian);
+        color: var(--color-paper);
+        font-size: 14px;
+        font-weight: 500;
+        border-radius: 9999px;
+        padding: 10px 24px;
+        border: 1px solid transparent;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+      }
+      .btn-filled:hover:not(:disabled) {
+        background-color: #222222;
+        transform: translateY(-1px);
+      }
+      .btn-filled:active:not(:disabled) {
+        transform: translateY(0);
+      }
+      .btn-filled:disabled {
+        background-color: var(--color-ash);
+        color: var(--color-smoke);
+        cursor: not-allowed;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: var(--color-obsidian);
+        font-size: 14px;
+        font-weight: 500;
+        border: 1px solid var(--color-hairline);
+        border-radius: 9999px;
+        padding: 8px 20px;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+      .btn-outline:hover:not(:disabled) {
+        background-color: var(--color-ash);
+        border-color: rgba(0, 0, 0, 0.2);
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 4px 6px 0px, rgba(0, 0, 0, 0.05) 0px 0px 2px 0px;
+      }
+      .btn-outline:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+
+      .btn-ghost {
+        background-color: transparent;
+        color: var(--color-obsidian);
+        font-size: 14px;
+        font-weight: 500;
+        border: none;
+        border-radius: 9999px;
+        padding: 6px 14px;
+        transition: background-color 0.15s ease, color 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+      .btn-ghost:hover {
+        background-color: var(--color-whisper);
+      }
+
+      .card-editorial {
+        background-color: var(--color-paper);
+        border: 1px solid var(--color-hairline);
+        border-radius: var(--radius-cards);
+        transition: border-color 0.15s ease;
+      }
+
+      .input-prompt {
+        background-color: transparent;
+        color: var(--color-obsidian);
+        font-size: 16px;
+        font-weight: 400;
+        border: 1px solid var(--color-hairline);
+        border-radius: 9999px;
+        padding: 10px 20px;
+        transition: border-color 0.15s ease;
+        outline: none;
+      }
+      .input-prompt::placeholder {
+        color: var(--color-graphite);
+      }
+      .input-prompt:focus {
+        border-color: var(--color-obsidian);
+      }
+    </style>
+</head>
+<body class="min-h-screen bg-paper text-obsidian flex flex-col">
+    <div id="app" class="flex-1 flex flex-col"></div>
+    <script type="module" src="/main.js"></script>
+</body>
+</html>

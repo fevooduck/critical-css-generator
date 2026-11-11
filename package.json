@@ -1,0 +1,37 @@
+{
+  "name": "critical-css-generator",
+  "version": "1.0.0",
+  "description": "Batch critical CSS generator with first-fold mobile/desktop blocks and visual validation",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "NODE_OPTIONS='--max-http-header-size=32768 --no-deprecation' nodemon server.js",
+    "client": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "postinstall": "patch-package && npm run browsers",
+    "browsers": "playwright install --only-shell chromium",
+    "browsers:deps": "playwright install-deps chromium"
+  },
+  "engines": {
+    "node": ">=24"
+  },
+  "dependencies": {
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "critical": "9.0.0",
+    "cssnano": "^9.9.0",
+    "express": "^5.3.0",
+    "helmet": "^8.3.0",
+    "playwright": "^1.64.1",
+    "postcss": "^8.5.32",
+    "postcss-combine-duplicated-selectors": "^11.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.6",
+    "nodemon": "^3.1.14",
+    "patch-package": "^8.0.1",
+    "vite": "^8.3.5"
+  }
+}

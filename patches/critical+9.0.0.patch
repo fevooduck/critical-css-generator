@@ -1,0 +1,21 @@
+diff --git a/node_modules/critical/src/engines/render.js b/node_modules/critical/src/engines/render.js
+index b22b74a..28bbc57 100644
+--- a/node_modules/critical/src/engines/render.js
++++ b/node_modules/critical/src/engines/render.js
+@@ -84,8 +84,14 @@ function extractAboveFold({ width, height }) {
+   const fold = { top: 0, left: 0, right: width, bottom: height };
+ 
+   const intersects = (el) => {
+-    const r = el.getBoundingClientRect();
+-    return r.top < fold.bottom && r.bottom > fold.top && r.left < fold.right && r.right > fold.left;
++    // A display:none element has no box, so judge it by its nearest rendered
++    // ancestor: the rule hiding a menu/slideshow in the fold is critical too.
++    while (el && el.getClientRects().length === 0) el = el.parentElement;
++    if (!el) return false;
++    // Only "starts before the fold ends" (penthouse's criterion): elements
++    // moved off-screen in the fold (skip links at top:-100px, left:-9999px,
++    // off-canvas drawers) need the rule that keeps them there.
++    return el.getBoundingClientRect().top < fold.bottom;
+   };
+ 
+   const matchesAboveFold = (selector) => {

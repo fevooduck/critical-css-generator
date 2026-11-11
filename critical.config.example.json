@@ -1,0 +1,15 @@
+{
+  "ignoredStylesheets": ["print.css", "icon-library.css"],
+  "ignoredSelectorPatterns": ["^\\.social-feed", "#chat-widget"],
+  "defaultExcludedSelectors": [".modal", "#onetrust-banner-sdk", ".dropdown-content"],
+  "acceptLanguage": "en-US,en;q=0.9",
+  "urlPlaceholder": "https://www.example.com/",
+  "proxies": {
+    "www.example.com": "http://user:password@proxy-host:8080"
+  },
+  "browser": {
+    "channel": "",
+    "launchArgs": []
+  },
+  "hooksFile": "local/browser-hooks.js"
+}

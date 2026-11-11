@@ -1,0 +1,33 @@
+# dependencies
+/node_modules
+
+# production
+/build
+/dist
+
+# persisted job/domain/browser data
+/data
+
+# project-specific settings (settings center) and legacy proxy file;
+# both can carry client names and proxy credentials
+/critical.config.json
+/proxies.json
+
+# private browser hooks and local-only helpers
+/local
+
+# editor / agent settings
+.claude/
+.vscode/
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
